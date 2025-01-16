@@ -1,3 +1,81 @@
+const form = document.getElementById("form");
+const name = document.getElementById("name");
+const price = document.getElementById("price");
+const description = document.getElementById("description");
+const btn = document.getElementById("btn");
+const container = document.getElementById("container");
+
+function validate() {
+  return true;
+}
+
+function creadCard(phone) {
+  return `
+    <div class="card">
+      <h3>${phone.name}</h3>
+      <h3>${phone.price}</h3>
+      <p>${phone.description}</p>
+    </div>
+  `;
+}
+
+form &&
+  form.addEventListener("click", function (event) {
+    event.preventDefault;
+
+    const valid = validate();
+    if (!valid) {
+      return;
+    }
+
+    const product = {
+      name: name.value,
+      description: description.value,
+      status: "activ",
+      category_id: 2,
+      price: price.value,
+    };
+
+    fetch("https://auth-rg69.onrender.com/api/products/", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((response) => {
+        if (response.status == 200) {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("https://auth-rg69.onrender.com/api/products/all")
+    .then((response) => {
+      if (response.status == 200) {
+        response.json();
+      }
+    })
+    .then((data) => {
+      if (Array.isArray(data)) {
+        data.forEach((phone) => {
+          let card = creadCard(phone);
+          container.innerHTML += card;
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 //1-misol
 //Bir nechta ranglardan iborat <div> bloklarni yarating (masalan, qizil, yashil, ko‘k).
 //Har bir rang blokiga bosilganda, ekrandagi <p> matnining rangi o‘sha blok rangiga o‘zgarishi kerak.
@@ -77,17 +155,3 @@ reset &&
 //Rasmlarning ustiga tegishli kategoriya yozuvi qo‘shing (masalan, "Tabiat", "Mashina").
 //Yuqorida <input> qidiruv maydoni va "Filtrlash" tugmasini joylashtiring.
 //Foydalanuvchi kategoriya nomini kiritib "Filtrlash" tugmasini bossin, va faqat mos keluvchi rasmlar ko‘rinib tursin.
-
-function filterImages() {
-  const input = document.getElementById("category-input").value.toLowerCase();
-  const items = document.querySelectorAll(".grid-item");
-
-  items.forEach((item) => {
-    const category = item.getAttribute("data-category").toLowerCase();
-    if (category.includes(input)) {
-      item.classList.remove("hidden");
-    } else {
-      item.classList.add("hidden");
-    }
-  });
-}

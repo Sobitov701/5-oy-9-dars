@@ -1,53 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="./style/style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>9-dars</title>
   </head>
-  <style>
-    body button {
-      padding: 6px;
-      background-color: green;
-    }
-
-    .div {
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    #text {
-      margin: 30px auto;
-      width: 80%;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: green;
-    }
-
-    #timer-container {
-      margin-top: 50px;
-
-      max-width: 1000px;
-      width: 100%;
-      margin: 0 auto;
-    }
-    #timer-container #timer {
-      background-color: red;
-      color: black;
-      padding: 10px;
-      width: 10%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  </style>
 
   <body>
+    <form id="form">
+      <input type="text" id="name" placeholder="enter name" />
+      <input type="number" id="price" placeholder="enter price" />
+      <textarea id="description" placeholder="enter description"></textarea>
+      <button id="btn">SAVE</button>
+    </form>
+
+    <div id="container"></div>
+
     <div class="div">
       <button id="btn1">qizil</button>
       <button id="btn2">sariq</button>
